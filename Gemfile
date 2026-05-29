@@ -43,4 +43,8 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "dotenv-rails"
 end
+
+gem 'sidekiq', '~> 8.1', '>= 8.1.6'
