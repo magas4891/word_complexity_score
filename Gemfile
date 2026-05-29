@@ -48,3 +48,9 @@ group :development, :test do
 end
 
 gem "sidekiq", "~> 7.0"
+
+group :test do
+  gem "rspec-rails"
+  gem "webmock"
+  gem "factory_bot_rails"
+end

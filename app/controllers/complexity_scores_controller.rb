@@ -2,7 +2,7 @@ class ComplexityScoresController < ApplicationController
   def create
     words = params[:words]
 
-    return render json: { error: "words must be a non-empty array" }, status: :unprocessable_entity unless valid_words?(words)
+    return render json: { error: "words must be a non-empty array" }, status: :unprocessable_content unless valid_words?(words)
 
     job = Job.create!(
       job_id: SecureRandom.uuid,
