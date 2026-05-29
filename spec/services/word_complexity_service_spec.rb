@@ -10,11 +10,11 @@ RSpec.describe WordComplexityService do
           {
             "partOfSpeech" => "adjective",
             "definitions" => [
-              { "definition" => "Feeling joy.", "synonyms" => ["joyful"], "antonyms" => ["sad"] },
+              { "definition" => "Feeling joy.", "synonyms" => [ "joyful" ], "antonyms" => [ "sad" ] },
               { "definition" => "Fortunate.", "synonyms" => [], "antonyms" => [] }
             ],
-            "synonyms" => ["glad", "content"],
-            "antonyms" => ["unhappy"]
+            "synonyms" => [ "glad", "content" ],
+            "antonyms" => [ "unhappy" ]
           }
         ]
       }
@@ -50,7 +50,7 @@ RSpec.describe WordComplexityService do
             "meanings" => [
               {
                 "partOfSpeech" => "noun",
-                "definitions" => [{ "definition" => "A thing.", "synonyms" => [], "antonyms" => [] }],
+                "definitions" => [ { "definition" => "A thing.", "synonyms" => [], "antonyms" => [] } ],
                 "synonyms" => [],
                 "antonyms" => []
               }
@@ -86,7 +86,7 @@ RSpec.describe WordComplexityService do
     context "when the API returns no meanings" do
       before do
         allow(DictionaryApiService).to receive(:call).with(word)
-          .and_return(ApplicationService::Result.new(success?: true, value: [{ "meanings" => [] }], error: nil))
+          .and_return(ApplicationService::Result.new(success?: true, value: [ { "meanings" => [] } ], error: nil))
       end
 
       it "returns a failure result" do

@@ -11,7 +11,7 @@ class WordComplexityJob < ApplicationJob
 
     results = Parallel.map(job.words, in_threads: 10) do |word|
       result = WordComplexityService.call(word)
-      [word, result.success? ? result.value : nil]
+      [ word, result.success? ? result.value : nil ]
     end.to_h
 
     status = results.values.all?(&:nil?) ? "failed" : "completed"

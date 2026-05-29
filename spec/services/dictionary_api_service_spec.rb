@@ -11,10 +11,10 @@ RSpec.describe DictionaryApiService do
           {
             "partOfSpeech" => "adjective",
             "definitions" => [
-              { "definition" => "Feeling joy.", "synonyms" => ["joyful"], "antonyms" => ["sad"] }
+              { "definition" => "Feeling joy.", "synonyms" => [ "joyful" ], "antonyms" => [ "sad" ] }
             ],
-            "synonyms" => ["glad"],
-            "antonyms" => ["unhappy"]
+            "synonyms" => [ "glad" ],
+            "antonyms" => [ "unhappy" ]
           }
         ]
       }

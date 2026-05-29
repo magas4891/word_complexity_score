@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "ComplexityScores", type: :request do
   describe "POST /complexity-score" do
-    let(:words) { ["happy", "sad"] }
+    let(:words) { [ "happy", "sad" ] }
     let(:headers) { { "Content-Type" => "application/json" } }
 
     before { ActiveJob::Base.queue_adapter = :test }
