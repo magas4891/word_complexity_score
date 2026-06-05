@@ -47,7 +47,7 @@ group :development, :test do
   gem "dotenv-rails"
 end
 
-gem "sidekiq", "~> 7.0"
+gem "sidekiq", "~> 8.1"
 
 group :test do
   gem "rspec-rails"
