@@ -14,6 +14,8 @@ class ComplexityScoresController < ApplicationController
     WordComplexityJob.perform_later(job.id)
 
     render json: { job_id: job.job_id }, status: :accepted
+  rescue ActiveRecord::RecordInvalid => e
+    render json: { error: e.message }, status: :unprocessable_content
   end
 
   def show

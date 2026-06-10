@@ -30,6 +30,18 @@ RSpec.describe "ComplexityScores", type: :request do
       end
     end
 
+    context "when job_id is not unique" do
+      it "returns 422 with an error message" do
+        allow(SecureRandom).to receive(:uuid).and_return("duplicate-id")
+        create(:job, job_id: "duplicate-id")
+
+        post "/complexity-score", params: { words: words }.to_json, headers: headers
+
+        expect(response).to have_http_status(:unprocessable_content)
+        expect(JSON.parse(response.body)["error"]).to be_present
+      end
+    end
+
     context "with an empty array" do
       it "returns 422" do
         post "/complexity-score", params: { words: [] }.to_json, headers: headers
