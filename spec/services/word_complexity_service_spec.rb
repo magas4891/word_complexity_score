@@ -83,6 +83,55 @@ RSpec.describe WordComplexityService do
       end
     end
 
+    context "when meanings/definitions are missing synonyms or antonyms keys" do
+      let(:sparse_api_data) do
+        [
+          {
+            "meanings" => [
+              {
+                "partOfSpeech" => "noun",
+                "definitions" => [ { "definition" => "A thing." } ]
+              }
+            ]
+          }
+        ]
+      end
+
+      before do
+        allow(DictionaryApiService).to receive(:call).with(word)
+          .and_return(ApplicationService::Result.new(success?: true, value: sparse_api_data, error: nil))
+      end
+
+      it "treats missing synonyms/antonyms as empty and returns 0.0" do
+        result = described_class.call(word)
+        expect(result.success?).to be true
+        expect(result.value).to eq(0.0)
+      end
+    end
+
+    context "when a meaning has no definitions key" do
+      let(:no_definitions_api_data) do
+        [
+          {
+            "meanings" => [
+              { "partOfSpeech" => "noun", "synonyms" => [ "thing" ], "antonyms" => [] }
+            ]
+          }
+        ]
+      end
+
+      before do
+        allow(DictionaryApiService).to receive(:call).with(word)
+          .and_return(ApplicationService::Result.new(success?: true, value: no_definitions_api_data, error: nil))
+      end
+
+      it "returns a failure result for no definitions found" do
+        result = described_class.call(word)
+        expect(result.success?).to be false
+        expect(result.error).to include("No definitions found")
+      end
+    end
+
     context "when the API returns no meanings" do
       before do
         allow(DictionaryApiService).to receive(:call).with(word)
